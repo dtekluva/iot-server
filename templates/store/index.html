@@ -12,7 +12,7 @@
       <a class="logo" href="index.html">
         <div class="logo-element"></div>
         <div class="logo-label">
-          Clean Admin
+          Arduino IOT Dashboard
         </div>
       </a>
     </div>
@@ -199,14 +199,14 @@
         </div>
         <div class="ssg-content">
           <div class="ssg-items ssg-items-boxed">
-           
+
           </div>
         </div>
       </div>
       <div class="search-suggestions-group">
-       
+
         <div class="ssg-content">
-          
+
         </div>
       </div>
       <div class="search-suggestions-group">
@@ -269,7 +269,7 @@
         -------------------->
         <div class="menu-mobile menu-activated-on-click color-scheme-dark">
           <div class="mm-logo-buttons-w">
-            <a class="mm-logo" href="index.html"><img src="img/logo.png"><span>Convenant Admin</span></a>
+            <a class="mm-logo" href="index.html"><img src="img/logo.png"><span>Sensors Dashboard</span></a>
             <div class="mm-buttons">
               <div class="content-panel-open">
                 <div class="os-icon os-icon-grid-circles"></div>
@@ -313,21 +313,21 @@
             <!--------------------
             START - Mobile Menu List
             -------------------->
-            
+
             <!--------------------
             END - Mobile Menu List
             -------------------->
-            <div class="mobile-menu-magic">
-              <h4>
-                Light Admin
-              </h4>
-              <p>
-                Clean Bootstrap 4 Template
-              </p>
-              <div class="btn-w">
-                <a class="btn btn-white btn-rounded" href="https://themeforest.net/item/light-admin-clean-bootstrap-dashboard-html-template/19760124?ref=Osetin" target="_blank">Purchase Now</a>
-              </div>
-            </div>
+            <!--<div class="mobile-menu-magic">-->
+            <!--  <h4>-->
+            <!--    Light Admin-->
+            <!--  </h4>-->
+            <!--  <p>-->
+            <!--    Clean Bootstrap 4 Template-->
+            <!--  </p>-->
+            <!--  <div class="btn-w">-->
+            <!--    <a class="btn btn-white btn-rounded" href="https://themeforest.net/item/light-admin-clean-bootstrap-dashboard-html-template/19760124?ref=Osetin" target="_blank">Purchase Now</a>-->
+            <!--  </div>-->
+            <!--</div>-->
           </div>
         </div>
         <!--------------------
@@ -340,13 +340,13 @@
             <a class="logo" href="index.html">
               <div class="logo-element"></div>
               <div class="logo-label">
-                Convenant Admin
+                Sensors Data
               </div>
             </a>
           </div>
           <div class="logged-user-w avatar-inline">
             <div class="logged-user-i">
-              
+
                 {% if user.is_authenticated %}
                   <div class="avatar-w">
                     <img alt="" src="img/avatar1.jpg">
@@ -384,12 +384,12 @@
                   <div class="avatar-w">
                     <img alt="" src="img/avatar1.jpg">
                   </div>
-                  
+
                 </div>
                 <div class="bg-icon">
                   <i class="os-icon os-icon-wallet-loaded"></i>
                 </div>
-               
+
               </div>
             </div>
           </div>
@@ -400,7 +400,7 @@
             <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right">
               <i class="os-icon os-icon-mail-14"></i>
               <div class="os-dropdown light message-list">
-               
+
               </div>
             </div>
             <!--------------------
@@ -423,12 +423,12 @@
             -------------------->
             <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right">
               <i class="os-icon os-icon-zap"></i>
-             
+
               <div class="os-dropdown light message-list">
                 <div class="icon-w">
                   <i class="os-icon os-icon-zap"></i>
                 </div>
-               
+
               </div>
             </div>
             <!--------------------
@@ -441,18 +441,18 @@
           <h1 class="menu-page-header">
             Page Header
           </h1>
-          
-          <div class="side-menu-magic">
-            <h4>
-              Light Admin
-            </h4>
-            <p>
-              Clean Bootstrap 4 Template
-            </p>
-            <div class="btn-w">
-              <a class="btn btn-white btn-rounded" href="https://themeforest.net/item/light-admin-clean-bootstrap-dashboard-html-template/19760124?ref=Osetin" target="_blank">Powered</a>
-            </div>
-          </div>
+
+          <!--<div class="side-menu-magic">-->
+          <!--  <h4>-->
+          <!--    Light Admin-->
+          <!--  </h4>-->
+          <!--  <p>-->
+          <!--    Clean Bootstrap 4 Template-->
+          <!--  </p>-->
+          <!--  <div class="btn-w">-->
+          <!--    <a class="btn btn-white btn-rounded" href="https://themeforest.net/item/light-admin-clean-bootstrap-dashboard-html-template/19760124?ref=Osetin" target="_blank">Powered</a>-->
+          <!--  </div>-->
+          <!--</div>-->
         </div>
         <!--------------------
         END - Main Menu
@@ -475,15 +475,15 @@
                         Total Sensor posts
                       </div>
                       <div class="balance-value">
-                        <span>{{posts.count}}</span>
+                        <span id="t_posts">{{posts.count}}</span>
                       </div>
 
                     </div>
                     <div class="balance">
                       <div class="balance-title">
-                        Total Sensors installed
+                        Total Locations
                       </div>
-                      <div class="balance-value">
+                      <div id="devices" class="balance-value">
                         {{devices.count}}
                       </div>
                     </div>
@@ -491,7 +491,7 @@
                       <div class="balance-title">
                         Posts Today
                       </div>
-                      <div class="balance-value danger">
+                      <div id="t_today" class="balance-value danger">
                         {{posts_today.count}}
                       </div>
                     </div>
@@ -528,7 +528,7 @@
                     Real-Time data
                   </h5>
                   <div class="el-chart-w">
-                    <canvas height="120" id="liteLineChartV2" width="300"></canvas>
+                    <canvas height="140" id="liteLineChartV2" width="300"></canvas>
                   </div>
                 </div>
               </div>
@@ -555,7 +555,7 @@
                   </div>
                   <div class="table-responsive">
                     <table id="example" width="100%" class="table table-striped table-lightfont">
-                      
+
                     </table>
                   </div>
                 </div>
@@ -571,5 +571,5 @@
   </div>
   <div class="display-type"></div>
 </div>
-        
+
 {% endblock %}

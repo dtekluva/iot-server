@@ -1,5 +1,5 @@
 'use strict';
-var host ="http://localhost:8000/";
+var host ="http://arduinoiot.pythonanywhere.com/";
 /*
 
 Main javascript functions to init most of the elements
@@ -19,7 +19,7 @@ Main javascript functions to init most of the elements
 #13. EMAIL APP
 #14. FULL CHAT APP
 #15. CRM PIPELINE
-#16. OUR OWN CUSTOM DROPDOWNS 
+#16. OUR OWN CUSTOM DROPDOWNS
 #17. BOOTSTRAP RELATED JS ACTIVATIONS
 #18. TODO Application
 #19. Fancy Selector
@@ -80,7 +80,7 @@ $(function () {
   // #5. DATATABLES
 
   var dataSet = [
-    
+
 ];
 
 
@@ -102,11 +102,11 @@ $(document).ready(function() {
 
 
 var update_table = (()=>{
-      
+
       $('#example').dataTable().fnClearTable();
       $('#example').dataTable().fnAddData(dataSet);
 })
-  
+
 var update_interval = setInterval(()=>{
   $.ajax({
     type: "GET",
@@ -114,30 +114,39 @@ var update_interval = setInterval(()=>{
         async: true,
     success: function(res) {
       let result = JSON.parse(res)
-      console.log(result)
-        dataSet = [];
-        
-       result.forEach(element => {
-        let new_arr = [];
-        new_arr.push(element.time) 
-        new_arr.push(element.s_time) 
-        new_arr.push(element.co) 
-        new_arr.push(element.ch4) 
-        new_arr.push(element.aq) 
-        new_arr.push(element.h) 
 
-        // console.log(new_arr)
+      dataSet = [];
+
+       result.data.forEach(element => {
+        let new_arr = [];
+        new_arr.push(element.time)
+        new_arr.push(element.s_time)
+        new_arr.push(element.co)
+        new_arr.push(element.ch4)
+        new_arr.push(element.aq)
+        new_arr.push(element.h)
+
         dataSet.push(new_arr)
        });
-       console.log(dataSet)
+
+       update_totals(result.totals.posts, result.totals.devices, result.totals.posts_today); //update totals in html
        update_table();
-       
+
     },
     error: function(){
     alert("something went wrong")
     }
   })
 }, 3000);
+
+
+  // #MISC update totals in html
+
+  function update_totals(t_posts, devices, posts_t ){
+      let total_posts = (document.getElementById('t_posts').innerHTML) = t_posts
+      let total_devices = (document.getElementById('devices').innerHTML) =devices
+      let total_today = (document.getElementById('t_today').innerHTML) =  posts_t
+      }
   // #6. EDITABLE TABLES
 
   if ($('#editableTable').length) {
@@ -205,7 +214,7 @@ var update_interval = setInterval(()=>{
       liteLineGradientV2.addColorStop(0, 'rgba(40,97,245,0.1)');
       liteLineGradientV2.addColorStop(1, 'rgba(40,97,245,0)');
 
-      
+
 
       var monooxide_data = [50,50,50,50,50,50,50,50,50,50,50];
       var methane_data = [50,50,50,50,50,50,50,50,50,50,50];
@@ -343,13 +352,13 @@ var update_interval = setInterval(()=>{
     setInterval(() => {
 
       update_chart_data();
-      
+
       myLiteLineChartV2.data.datasets[0].data = monooxide_data;
       myLiteLineChartV2.data.datasets[1].data = methane_data;
       myLiteLineChartV2.data.datasets[2].data = hydrogen_data;
       myLiteLineChartV2.data.datasets[3].data = air_quality_data;
-      
-      myLiteLineChartV2.data.labels = myLiteLineChartV2.data.labels = 
+
+      myLiteLineChartV2.data.labels = myLiteLineChartV2.data.labels =
       myLiteLineChartV2.data.labels = myLiteLineChartV2.data.labels = labels;
 
       myLiteLineChartV2.update();
@@ -373,9 +382,8 @@ var update_interval = setInterval(()=>{
         air_quality_data.push(dataSet[index][4]);
         hydrogen_data.push(dataSet[index][5]);
 
-     
+
    }
-   console.log(monooxide_data)
   })
 
 
@@ -396,7 +404,7 @@ var update_interval = setInterval(()=>{
     $('.all-wrapper').toggleClass('content-panel-active');
   });
 
-  // #13. EMAIL APP 
+  // #13. EMAIL APP
 
   $('.more-messages').on('click', function () {
     $(this).hide();
@@ -472,7 +480,7 @@ var update_interval = setInterval(()=>{
     });
   }
 
-  // #16. OUR OWN CUSTOM DROPDOWNS 
+  // #16. OUR OWN CUSTOM DROPDOWNS
   $('.os-dropdown-trigger').on('mouseenter', function () {
     $(this).addClass('over');
   });

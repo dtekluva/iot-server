@@ -11,8 +11,8 @@ from django.contrib.auth import views as auth_views
 #     url(r'^user/reset-password$', views.resetPasswordView,name='reset-password'),
 # ]
 
-urlpatterns = [ 
-    path('register',  views.register,name='register'), 
-    path('login', auth_views.login),
-    path('logout', auth_views.logout),
+urlpatterns = [
+    path('register',  views.register,name='register'),
+    url( r'^login/$',auth_views.LoginView.as_view(template_name="user/login.html"), name="login"),
+    path('logout', auth_views.LogoutView.as_view),
  ]

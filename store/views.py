@@ -13,14 +13,13 @@ import json
 
 # Create your views here.
 
-@login_required
 def index(request):
+
     today = datetime.now()
-    print(today)
     posts = Sensor_Post.objects.all()
     devices = Device.objects.all()
     posts_today = Sensor_Post.objects.filter(created_at__date=datetime.date(today))
-    print(posts_today)
+
     return render(request, 'store/index.html', {'posts':posts, 'devices':devices, "posts_today":posts_today})
 
 @csrf_exempt
@@ -50,7 +49,13 @@ def iot(request):
 def fetch(request):
 
     data = Sensor_Post.objects.order_by('-sensor_time')[:200]
-    response = []
+
+    today = datetime.now() #get details of total posts today and all posts
+    posts = Sensor_Post.objects.all().count()
+    devices = Device.objects.all().count()
+    posts_today = (Sensor_Post.objects.filter(created_at__date=datetime.date(today))).count()
+
+    post_array = []
     for post in data:
         cleaned_time = str(post.sensor_time).replace("datetime.datetime(", "")
         cleaned_time = (cleaned_time).replace(")", "")
@@ -58,8 +63,13 @@ def fetch(request):
         cleaned_stime = str(post.created_at).replace("datetime.datetime(", "")
         cleaned_stime = (cleaned_stime).replace(")", "")
         cleaned_stime = (cleaned_stime)[:-16]
+
         new_val = {"time": cleaned_time, "s_time": cleaned_stime, "co": post.co_val, "ch4":post.ch4_val, "aq": post.aq_val,"h": post.h_val}
-        response.append(new_val)
+        post_array.append(new_val)
+
+    details = {'posts':posts, 'devices':devices, "posts_today":posts_today} #append details of total posts today and all posts
+
+    response = {"totals":details,"data":post_array}
 
     return HttpResponse(json.dumps(response))
 

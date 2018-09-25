@@ -33,7 +33,7 @@ SECRET_KEY = 'xlpde$fd7(c&5yixf8a2%%yet^#&*uysgxs14g&xh8aw7!83v$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['arduinoiot.pythonanywhere.com']
 
 
 # Application definition
